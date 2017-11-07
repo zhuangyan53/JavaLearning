@@ -15,11 +15,14 @@ public class StandardMbeanTest {
 
 
     public static void main(String[] args) throws MalformedObjectNameException, NotCompliantMBeanException, InstanceAlreadyExistsException, MBeanRegistrationException, IOException, InterruptedException {
-        MBeanServer mbs = JmxServer.getMbeanServer();
+        MBeanServer mbs = JmxServer.getExposedMbeanServer();
+
         HelloMBean hello = new Hello();
         ObjectName on = new ObjectName("com.t2Sharing.JMX.standardmbean:type=Hello");
         mbs.registerMBean(hello, on);
 
+
         Util.sleepUntilReciveExitFromKeyBoard();
+        JmxServer.stopServer();
     }
 }
